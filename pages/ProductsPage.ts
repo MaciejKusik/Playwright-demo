@@ -7,9 +7,14 @@ export class ProductsPage {
     this.page = page
   }
 
+  async goToCart() {
+    await this.page.locator('[data-test="shopping-cart-link"]').click()
+    await expect(this.page.getByText('Your Cart')).toBeVisible()
+  }
+
   async addFewProducts(param: { products: string[] }) {
     for (const product of param.products) {
-    await this.page.locator(`[data-test$="${product}"]`).click()
+      await this.page.locator(`[data-test$="${product}"]`).click()
     }
   }
 
